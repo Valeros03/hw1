@@ -472,10 +472,6 @@ function onTokenResponse(response)
 }
 
 
-
-const accediButton = document.querySelector('#accedi');
-
-
 const elementList = document.querySelectorAll('div.element-show');
 let homeToken;
 
@@ -519,6 +515,8 @@ fetch("https://accounts.spotify.com/api/token",
    }
   }
 ).then(onTokenResponse).then(onTokenJson);
+
+
 
 
 const moreArtist = document.querySelector('#more-artist');

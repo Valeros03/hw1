@@ -95,8 +95,8 @@
             </div>
 
             <div id="authentication">
-                <a href="#" class="gray-link open-sans"><strong>Iscriviti</strong></a>
-                <button id="accedi" class="white-button open-sans"><strong>Accedi</strong></button>
+                <a href="signin.php" class="gray-link open-sans"><strong>Iscriviti</strong></a>
+                <a href='login.php'> <button id="accedi" class="white-button open-sans"><strong>Accedi</strong></button></a>
             </div>
             <div id="menu">
                 <div></div>
