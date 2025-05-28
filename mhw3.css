@@ -533,15 +533,24 @@ button.gray-back:hover{
     flex:1;
     flex-direction: column;
     padding:12px;
-    
 }
 
 .show-category{
 
     display: flex;
     flex:1;
+    
 
 }
+
+.show-category a{
+
+
+ text-decoration: none;    
+
+}
+
+ 
 @media(max-width: 500px){
 
     .show-category{
@@ -555,6 +564,7 @@ button.gray-back:hover{
 
     font-size: 1rem;
     margin-bottom: 0;
+    color:white;
 
 }
 

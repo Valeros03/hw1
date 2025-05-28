@@ -46,7 +46,16 @@ require_once 'auth.php';
             $query = "INSERT INTO accounts(username, pass, nome, nascita, sesso) VALUES('$username', '$password', '$name', '$birth', '$gender')";
             
             if (mysqli_query($conn, $query)) {
+
+                curl_setopt($curl, CURLOPT_URL, "https://accounts.spotify.com/api/token");
+                curl_setopt($curl, CURLOPT_POST, 1);
+                curl_setopt($curl, CURLOPT_POSTFIELDS, "grant_type=client_credentials");
+                $headers = array("Authorization: Basic ".base64_encode($client_id.":".$client_secret));
+                curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+
                 $_SESSION["username"] = $_POST["username"];
+                $_SESSION["token"] = curl_exec($curl);
+                curl_close($curl);
                 
                 mysqli_close($conn);
                 header("Location: homepage.php");
@@ -68,15 +77,6 @@ require_once 'auth.php';
 
 ?>
 
-
-<!DOCTYPE html>
-<html>
-<head>
-
-
-
-
-</head>
 
 <!DOCTYPE html>
 <html>

@@ -155,14 +155,6 @@ function search(event)
   ).then(onResponse).then(onJson);
 }
 
-
-function updateShowMore(valore){
-
-    moreArtist.href = 'artist.html?input=' + encodeURIComponent(valore);
-    moreTrack.href = 'track.html?input=' + encodeURIComponent(valore);
-    moreAlbum.href = 'album.html?input=' + encodeURIComponent(valore);
-  }
-  
  
 
 
