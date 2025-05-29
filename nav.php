@@ -47,7 +47,7 @@ echo  '<div class="hidden" id="dropdown-pam">
 
         <div id="icon-space">
 
-            <a href="mhw3.html" id="header-spotify-link">
+            <a href="index.php" id="header-spotify-link">
                 <img src="https://storage.googleapis.com/pr-newsroom-wp/1/2023/05/Spotify_Primary_Logo_RGB_White.png" class="icon-image">
             </a>
         
@@ -55,7 +55,7 @@ echo  '<div class="hidden" id="dropdown-pam">
 
         <div id="searching-bar">
 
-            <a href="mhw3.html" id="home-page-link">
+            <a href="index.php" id="home-page-link">
                 
                 <img src="https://img.icons8.com/?size=100&id=83326&format=png&color=737373" id="home-page-icon">
         
@@ -71,9 +71,9 @@ echo  '<div class="hidden" id="dropdown-pam">
                 <input type="text" placeholder="Cosa vuoi ascoltare?">
 
                 <div class="splitter"></div>
-                <a href="esplora.html" class="icon-button">
+                <div class="icon-button">
                 <img src="https://img.icons8.com/?size=100&id=8UdGJMu2c9dS&format=png&color=737373" class="searching-icon">
-                </a>
+                </div>
             </div>
 
         </div>

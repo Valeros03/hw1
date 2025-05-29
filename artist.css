@@ -1,0 +1,28 @@
+.header-artist{
+
+    display: flex;
+    align-items: center;
+    background-color: whitesmoke;
+    height: 300px;
+
+}
+
+.header-artist h1{
+
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    font-size: 64px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    
+}
+
+.header-artist img{
+    margin-left: 16px;
+    margin-right: 16px;
+}
+
+.intestazione-artista{
+
+    padding:64px;
+
+}

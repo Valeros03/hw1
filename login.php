@@ -2,7 +2,7 @@
 
 include 'auth.php';
     if (checkAuth()) {
-        header('Location: homepage.php');
+        header('Location: index.php');
         exit;
     }
 
@@ -22,19 +22,12 @@ if(!empty($_POST["username"]) && !empty($_POST["password"])){
             $entry = mysqli_fetch_assoc($res);
             if (password_verify($_POST['password'], $entry['pass'])) {
 
-                $curl = curl_init();
-
-                curl_setopt($curl, CURLOPT_URL, "https://accounts.spotify.com/api/token");
-                curl_setopt($curl, CURLOPT_POST, 1);
-                curl_setopt($curl, CURLOPT_POSTFIELDS, "grant_type=client_credentials");
-                $headers = array("Authorization: Basic ".base64_encode($client_id.":".$client_secret));
-                curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+                
 
                 $_SESSION["username"] = $entry['username'];
-                $_SESSION["token"] = curl_exec($curl);
-                curl_close($curl);
+                
 
-                header("Location: homepage.php");
+                header("Location: index.php");
                 mysqli_free_result($res);
                 mysqli_close($conn);
                 exit;

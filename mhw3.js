@@ -300,7 +300,7 @@ function onJson(json) {
         if(track_data.album.images)
             img.src = track_data.album.images[1].url;
         
-        const track = document.createElement('div');
+        const track = document.createElement('a');
         track.classList.add('element-show');
   
         const imgWrapper = document.createElement('div');
@@ -352,7 +352,7 @@ function onJson(json) {
             img.src = artist_data.images[0].url;
         
         
-        const artist = document.createElement('div');
+        const artist = document.createElement('a');
         artist.classList.add('element-show');
         artist.addEventListener('click', onArtistClick);
         artist.dataset.ArtistId = artist_data.id;
@@ -407,7 +407,7 @@ function onJson(json) {
         if(album_data.images.length > 0)
             img.src = album_data.images[0].url;
       
-      const album = document.createElement('div');
+      const album = document.createElement('a');
       album.classList.add('element-show');
 
       
@@ -434,7 +434,7 @@ function onJson(json) {
 
     }
 
-    const elementList = document.querySelectorAll('div.element-show');
+    const elementList = document.querySelectorAll('a.element-show');
 
 
     for(let element of elementList){
