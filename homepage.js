@@ -332,5 +332,3 @@ inputText.addEventListener('blur', unfocusedSearch);
 document.addEventListener('click', hideDropDown);
 menu.addEventListener('click', showDropDown);
 searchButton.addEventListener('click', showInputContainer);
-
-
