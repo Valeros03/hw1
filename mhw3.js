@@ -516,3 +516,4 @@ const moreTrack = document.querySelector('#more-track');
 const moreAlbum = document.querySelector('#more-album');
 
 inputText.addEventListener('input', search);
+

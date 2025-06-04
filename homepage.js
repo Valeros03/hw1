@@ -33,11 +33,20 @@ function showDropDown(event){
 
     event.stopPropagation();
     dropDown.classList.remove('hidden');
+    dropDownProf.classList.add('hidden');
+}
+
+function showProfDropDown(event){
+    event.stopPropagation();
+    dropDownProf.classList.remove('hidden');
+    dropDown.classList.add('hidden');
 }
 
 function hideDropDown(){
 
     dropDown.classList.add('hidden');
+    dropDownProf.classList.add('hidden');
+
 
 }
 
@@ -332,3 +341,13 @@ inputText.addEventListener('blur', unfocusedSearch);
 document.addEventListener('click', hideDropDown);
 menu.addEventListener('click', showDropDown);
 searchButton.addEventListener('click', showInputContainer);
+
+
+const profileButton = document.querySelector('#profile-button');
+const dropDownProf = document.querySelector('#dropdown-profile');
+
+if(profileButton){
+
+    profileButton.addEventListener('click', showProfDropDown);
+
+}

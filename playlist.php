@@ -5,7 +5,7 @@ include 'userCheck.php';
 $playlistId = $_GET["id"];
 
     $curl = curl_init();
-    curl_setopt($curl, CURLOPT_URL, "https://api.spotify.com/v1/palylists/".$artistplaylistIdId);
+    curl_setopt($curl, CURLOPT_URL, "https://api.spotify.com/v1/palylists/".$playlistIdId);
     $headers = array("Authorization: Bearer ".$_SESSION["token"]);
     curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);

@@ -1,10 +1,9 @@
 <?php  
 
 if(isset($_SESSION["username"])){
-    $nav = '<div class="image-background">
+    $nav = '<div id="profile-button" class="image-background">
 
                 <img id="profile-icon" src="https://img.icons8.com/?size=100&id=pETkiIKt6qBf&format=png&color=000000">
-
 
             </div>';
 }else{
@@ -13,7 +12,17 @@ if(isset($_SESSION["username"])){
                 <a href="login.php"> <button id="accedi" class="white-button open-sans"><strong>Accedi</strong></button></a>
             </div>';
 }
-
+echo '<div class="hidden" id=dropdown-profile>
+        <a href="Logout.php">
+            <div>
+                <p class="open-sans">Visualizza Profilo</p>
+            </div>
+            <div>
+                <p class="open-sans">Logout</p>
+            </div>
+        </a>
+        </div>';
+                
 echo  '<div class="hidden" id="dropdown-pam">
         <a href="#">
             <div>

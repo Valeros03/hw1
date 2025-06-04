@@ -1,0 +1,143 @@
+.header-album{
+
+    display: flex;
+    align-items: center;
+    background-color: whitesmoke;
+    height: 300px;
+
+}
+
+
+h3{
+    color:white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin-left: 32px;
+}
+
+.header-album h1{
+
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    font-size: 56px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    
+}
+
+.header-album img{
+    margin-left: 16px;
+    margin-right: 16px;
+}
+
+.intestazione-album{
+
+    padding:64px;
+
+}
+.info-album{
+
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    font-size: 16px;
+    color: rgb(92, 92, 92);
+
+}
+
+.info-album a{
+
+    text-decoration: none;
+    color:rgb(0, 0, 0);
+
+
+}
+
+
+#header-track-list{
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+#header-track-list div{
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 24px;
+    margin-right: 48px;
+    margin-top:24px;
+
+}
+
+#header-track-list div div{
+
+   display: flex;
+   margin:24px;
+   align-items: center;
+   color:whitesmoke;
+
+}
+
+#songs{
+    margin-top:32px;
+    color:gray;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.song:hover{
+
+     background-color: rgb(45, 45, 45);
+}
+
+.song div{
+    display: flex;
+    align-items: center;
+    margin-left:24px;
+}
+
+.song{
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding:16px;
+   
+}
+
+.song img{
+
+    width: 48px;
+    height: 48px;
+
+}
+
+.title-artists{
+
+    display: flex;
+    flex-direction: column;
+    align-content:start;
+    padding-left: 24px;
+    
+}
+.number{
+
+    width: 3ch;
+}
+
+.duration{
+
+    margin-left: 24px;
+    margin-right: 24px;
+}
+
+.song .names{
+
+    margin-left:0px;
+    
+
+}
+.space-text{
+    margin-right: 8px;
+    text-decoration: none;
+}

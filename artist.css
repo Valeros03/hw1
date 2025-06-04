@@ -46,10 +46,10 @@ h3{
 
 }
 
-.songs{
+#songs{
     margin-top:32px;
+    color:gray;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    
 }
 
 .song{
@@ -61,6 +61,11 @@ h3{
    
 }
 
+.song:hover{
+
+     background-color: rgb(45, 45, 45);
+}
+
 .song div{
     display: flex;
     align-items: center;
@@ -69,13 +74,20 @@ h3{
 .song span{
 
     margin: 24px;
-    color:gray;
     font-family: inherit;
      
 }
 
-.gray-focus{
+#discography{
 
+    display: flex;
+    justify-content: center;
 
-    background-color: rgb(45, 45, 45);
+}
+
+.altro{
+
+    margin-left:24px;
+    font-size: 16px;
+
 }

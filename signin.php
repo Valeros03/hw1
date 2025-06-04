@@ -92,10 +92,19 @@ require_once 'auth.php';
     <img class="icon-image" src="https://storage.googleapis.com/pr-newsroom-wp/1/2023/05/Spotify_Primary_Logo_RGB_White.png">
     <h3>Iscriviti a Spotify</h3>
 
-    <input type="text" placeholder="username" name='username'>
-    <input type="text" placeholder="nome" name='name'>
-    <input type="date" name='birth'>
-
+    <div id="username">
+        <input type="text" placeholder="username" name='username'<?php if(isset($_POST["username"])){echo "value=".$_POST["username"];} ?>>
+        <span>Inserisci il nome utente</span>
+    </div>
+    <div id="name">
+        <input type="text" placeholder="nome" name='name'<?php if(isset($_POST["name"])){echo "value=".$_POST["name"];} ?>>
+        <span>Inserisci il nome</span>
+    </div>
+    <div id="birth">
+        <input type="date" name='birth'<?php if(isset($_POST["birth"])){echo "value=".$_POST["birth"];} ?>>
+        <span>Selezionare la data</span>
+    </div>
+    <div id="gender">
     <div class="gender-radio">
         <label>Uomo<input type="radio" name="gender" value="uomo"></label>
         <label>Donna<input type="radio" name="gender" value="donna"></label>
@@ -106,9 +115,17 @@ require_once 'auth.php';
         <label>Non-binary<input type="radio" name="gender" value="non-binary"></label>
         <label>Preferisco non specificare<input type="radio" name="gender" value="preferisco non specificare"></label>
     </div>
+        <span>Effettuare una selezione per il genere</span>
+    </div>
 
-    <input type="password" placeholder="Password" name='password'>
-    <input type="password" placeholder="Conferma password" id='confermaPassword' name="confirm_password">
+    <div id="password">
+        <input type="password" placeholder="Password" name='password'<?php if(isset($_POST["password"])){echo "value=".$_POST["password"];} ?>>
+        <span>Inserire una password</span>
+    </div>
+    <div id="confirm_password">
+        <input type="password" placeholder="Conferma password" id='confermaPassword' name="confirm_password"<?php if(isset($_POST["confirm_password"])){echo "value=".$_POST["confirm_password"];} ?>>
+        <span>Confermare la password</span>
+    </div>
 
     <button class="green-button" type="submit">Conferma</button>
     <div id = 'error'>

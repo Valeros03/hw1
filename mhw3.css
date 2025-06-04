@@ -530,9 +530,12 @@ button.gray-back:hover{
 .element-show{
 
     display: flex;
+    position: relative;
     flex:1;
     flex-direction: column;
+    align-items: center;
     padding:12px;
+    text-decoration: none;
 }
 
 .show-category{
@@ -574,6 +577,7 @@ button.gray-back:hover{
     height: 100%;
     width: 100%;
     object-fit: cover;
+    aspect-ratio: 1/1;
 }
 
 .image-box{
@@ -587,9 +591,9 @@ button.gray-back:hover{
 
 .play-over{
 
-    margin-top:-16%;
-    margin-left: 75%;
-    margin-bottom: 10%;
+    position: absolute;
+    margin-left: 64%;
+    margin-top: 64%;
     background-color: #0c0c0c;
     width: 24px;
     height: 24px;
@@ -791,5 +795,16 @@ button.gray-back:hover{
     height: 80%;
     background-color: #222;
     overflow-y: scroll;
+
+  }
+
+
+  .separator{
+
+    background-color:rgb(83, 83, 83);
+    padding-left: 24px;
+    padding-right: 24px;
+    width: 90%;
+    height: 1px;
 
   }

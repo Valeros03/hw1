@@ -23,10 +23,16 @@ if(!empty($_POST["username"]) && !empty($_POST["password"])){
             if (password_verify($_POST['password'], $entry['pass'])) {
 
                 
-
+                $likeQuery ='SELECT likes.song FROM likes WHERE likes.username = "'.$username.'"';
+                $songRes = mysqli_query($conn, $likeQuery) or die(mysqli_error($conn));
+                $liked_songs = [];
+                while ($rowLike = mysqli_fetch_assoc($songRes)) {
+                        $liked_songs[$rowLike['song']] = true;
+                }   
+                $_SESSION['liked_songs'] = $liked_songs;
                 $_SESSION["username"] = $entry['username'];
                 
-
+                
                 header("Location: index.php");
                 mysqli_free_result($res);
                 mysqli_close($conn);
