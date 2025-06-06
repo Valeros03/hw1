@@ -14,7 +14,7 @@ require_once 'auth.php';
         $error = array();
         $conn = mysqli_connect($dbconfig['host'], $dbconfig['user'], $dbconfig['password'], $dbconfig['name']) or die(mysqli_error($conn));
         
-        if(!preg_match('/^[a-zA-Z0-9_]{1,15}$/', $_POST['username'])) {
+        if(!preg_match('/^[a-zA-Z0-9_]{1,16}$/', $_POST['username'])) {
             $error[] = "Username non valido";
         } else {
             $username = mysqli_real_escape_string($conn, $_POST['username']);
@@ -26,15 +26,29 @@ require_once 'auth.php';
             }
         }
      
-        if (strlen($_POST["password"]) < 8) {
-            $error[] = "Caratteri password insufficienti";
+        if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/', $_POST['password'])) {
+            $error[] = "La password deve contenere:\n-Almeno 8 caratteri\n-Una lettera maisucola\n-Una lettera maiuscola\n-Una cifra\n-Un carattere speciale";
         } 
         
         if (strcmp($_POST["password"], $_POST["confirm_password"]) != 0) {
             $error[] = "Le password non coincidono";
         }
 
-        
+        $oggi = new DateTime();
+        $datacheck = new DateTime($_POST['birth']);
+
+        $oggi->setTime(0, 0, 0);
+        $datacheck->setTime(0, 0, 0);
+
+        if($oggi < $datacheck) {
+            $error[] = "Sei nato nel futuro?";
+        }
+
+        if(isset($_POST["gender"])) 
+        {
+            $error[] = "Effettuare una scelta in merito al genere";
+
+        }
         if (count($error) == 0) {
             $name = mysqli_real_escape_string($conn, $_POST['name']);
             $birth = mysqli_real_escape_string($conn, $_POST['birth']);
@@ -93,11 +107,13 @@ require_once 'auth.php';
     <h3>Iscriviti a Spotify</h3>
 
     <div id="username">
-        <input type="text" placeholder="username" name='username'<?php if(isset($_POST["username"])){echo "value=".$_POST["username"];} ?>>
+        <label for='username'>Username</label>
+        <input type="text" name='username'<?php if(isset($_POST["username"])){echo "value=".$_POST["username"];} ?>>
         <span>Inserisci il nome utente</span>
     </div>
     <div id="name">
-        <input type="text" placeholder="nome" name='name'<?php if(isset($_POST["name"])){echo "value=".$_POST["name"];} ?>>
+        <label for='name'>Nome</label>
+        <input type="text" name='name'<?php if(isset($_POST["name"])){echo "value=".$_POST["name"];} ?>>
         <span>Inserisci il nome</span>
     </div>
     <div id="birth">
@@ -119,11 +135,13 @@ require_once 'auth.php';
     </div>
 
     <div id="password">
-        <input type="password" placeholder="Password" name='password'<?php if(isset($_POST["password"])){echo "value=".$_POST["password"];} ?>>
+        <label for='password'>Password</label>
+        <input type="password" name='password'<?php if(isset($_POST["password"])){echo "value=".$_POST["password"];} ?>>
         <span>Inserire una password</span>
     </div>
     <div id="confirm_password">
-        <input type="password" placeholder="Conferma password" id='confermaPassword' name="confirm_password"<?php if(isset($_POST["confirm_password"])){echo "value=".$_POST["confirm_password"];} ?>>
+        <label for='confirm_password'>Conferma Password</label>
+        <input type="password" id='confermaPassword' name="confirm_password"<?php if(isset($_POST["confirm_password"])){echo "value=".$_POST["confirm_password"];} ?>>
         <span>Confermare la password</span>
     </div>
 

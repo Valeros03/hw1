@@ -62,9 +62,10 @@ function checkPassword() {
 function checkBirth(){
 
     const birthInput = document.querySelector('#birth input');
+    const dataInserita = new Date(birthInput.value)
     const currentDate = new Date();
-    
-    if(Date(birthInput.value) > currentDate){
+    currentDate.setHours(0,0,0,0);
+    if( dataInserita > currentDate){
         document.querySelector('#birth').classList.add('errorj');
         birthInput.parentElement.querySelector('span').textContent = "La data di nascita deve essere una data trascorsa";
     }else{
@@ -80,6 +81,7 @@ function checkConfirmPassword() {
         document.querySelector('#confirm_password').classList.remove('errorj');
     } else {
         document.querySelector('#confirm_password').classList.add('errorj');
+        confirmPasswordInput.parentNode.querySelector('span').textContent = "Le password non coincidono";
     }
 }
 

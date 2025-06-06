@@ -323,7 +323,10 @@ function showInputContainer(){
     isShown = !isShown;
 }
 
+function GetSavedSongs(){
 
+    
+}
 
 const elementList = document.querySelectorAll('a.element-show');
 

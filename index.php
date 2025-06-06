@@ -174,11 +174,6 @@ include 'nav.php';
 
 </div>
 
-<script>
-    const token = <?php echo json_encode($token); ?>;
-    console.log("Spotify Token:", token);
-</script>
-
 </body>
 
 </html>

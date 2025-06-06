@@ -110,7 +110,6 @@ h3{
     justify-content: space-between;
     align-items: center;
     padding:16px;
-    font-size:18px;
    
 }
 
@@ -126,8 +125,8 @@ h3{
     display: flex;
     flex-direction: column;
     align-content:start;
-    padding-left: 24px;
     width: 24ch;
+    padding-left: 24px;
     
 }
 .number{
@@ -148,9 +147,36 @@ h3{
 
 }
 .space-text{
+    width: 32ch;
     margin-right: 8px;
     text-decoration: none;
 }
 .like-button{
     position:absolute;
+}
+
+.like{
+
+    width: 5%;
+}
+
+#header-track-playlist{
+
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+    align-items: center;
+    padding:16px;
+}
+
+#header-track-playlist div{
+    display: flex;
+    align-items: center;
+    margin-left:24px;
+}
+
+.song-space{
+
+    width: 24px;
+    height: 48px;
 }

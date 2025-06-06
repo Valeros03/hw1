@@ -19,7 +19,7 @@ function toggleLike(event) {
     const button = event.currentTarget;
     const icon = button.querySelector('img');
 
-    const songSpan = button.parentElement.parentElement;
+    const songSpan = button.parentElement.parentElement.parentElement;
     console.log(songSpan);
     const songId = songSpan.dataset.id;
     

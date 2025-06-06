@@ -45,8 +45,8 @@ $artistId = $_GET["id"];
                 echo '<h1>'.$result->name.'</h1>';
                 echo ''.$result->followers->total.' Followers';
                 echo '</span>';
-
         ?>
+        
     </div>
 
         <div class="action-menu">

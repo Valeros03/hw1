@@ -1,5 +1,7 @@
 <?php  
 
+require_once 'auth.php';
+
 if(isset($_SESSION["username"])){
     $nav = '<div id="profile-button" class="image-background">
 
@@ -11,6 +13,60 @@ if(isset($_SESSION["username"])){
                 <a href="signin.php" class="gray-link open-sans"><strong>Iscriviti</strong></a>
                 <a href="login.php"> <button id="accedi" class="white-button open-sans"><strong>Accedi</strong></button></a>
             </div>';
+}
+
+if(isset($_SESSION['username'])){
+
+    $username = $_SESSION['username'];
+    $conn = mysqli_connect($dbconfig['host'], $dbconfig['user'], $dbconfig['password'], $dbconfig['name']) or die(mysqli_error($conn));
+    $query = 'SELECT songs.id AS songId, songs.nome AS songName, albums.id AS albumId, albums.nome AS albumName, artists.id AS artistId, artists.nome AS artistName, albums.img AS img
+              FROM (SELECT * FROM likes WHERE likes.username = "'.$username.'") AS filtered_likes
+              JOIN songs ON songs.id = filtered_likes.song
+              JOIN albums ON albums.id = songs.album
+              JOIN artists ON artists.id = albums.artist';
+    $resultLikes = mysqli_query($conn, $query);
+    if(mysqli_num_rows($resultLikes) > 0){
+
+        $likes = '';
+        while($row = mysqli_fetch_assoc($resultLikes)){
+        $likes .= '<diV class="like-element">
+                    <img src="'.$row['img'].'">
+                    <div class = "song-info">
+                        <div>'.$row['songName'].'</div>
+                        <div class = "artist-album">
+                            <a href="artist.php?id='.$row['artistId'].'">'.$row['artistName'].'</a>
+                            <div>•</div>
+                            <a href="album.php?id='.$row['albumId'].'">'.$row['albumName'].'</a>
+                        </div>
+                    </div>
+                    <img src="https://img.icons8.com/?size=100&id=46&format=png&color=737373">
+                  </div>';
+        }
+
+    }else{
+        $likes = '<div class="no-likes">Non ci sono elementi salvati</div>';
+    }
+
+
+}else{
+
+
+    $likes ='<div class="new-element">
+                <div class="text-new-element">
+                    <p class="white-text open-sans"><strong>Crea la tua prima playlist</strong></p>
+                    <p class="white-text open-sans">è facile, ti aiuteremo</p>
+                </div>
+                <button>Crea playlist</button>
+                </div>
+
+           
+                <div class="new-element">
+                <div class="text-new-element">
+                    <p class="white-text open-sans"><strong>Cerca qualche podacast da seguire</strong></p>
+                    <p class="white-text open-sans">Ti aggiorneremo sui nuovi episodi</p>
+                </div>
+                <button>Sfoglia i podacast</button>
+               </div>';
 }
 echo '<div class="hidden" id=dropdown-profile>
         <a href="Logout.php">
@@ -122,23 +178,8 @@ echo  '<div class="hidden" id="dropdown-pam">
             
             </header>
     <section class="user-playlists">
-
-                <div class="new-element">
-                <div class="text-new-element">
-                    <p class="white-text open-sans"><strong>Crea la tua prima playlist</strong></p>
-                    <p class="white-text open-sans">è facile, ti aiuteremo</p>
-                </div>
-                <button>Crea playlist</button>
-                </div>
-
-           
-                <div class="new-element">
-                <div class="text-new-element">
-                    <p class="white-text open-sans"><strong>Cerca qualche podacast da seguire</strong></p>
-                    <p class="white-text open-sans">Ti aggiorneremo sui nuovi episodi</p>
-                </div>
-                <button>Sfoglia i podacast</button>
-               </div>
+        '.$likes.'
+                
     </section>
 
         <footer class="info">

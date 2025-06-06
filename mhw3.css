@@ -522,7 +522,6 @@ button.gray-back:hover{
     display: flex;
     flex-direction: column;
     color:white;
-    height: 348px;
     margin-left:2%;
     margin-top:16px;
 }

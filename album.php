@@ -55,7 +55,7 @@ $albumId = $_GET["id"];
 <header id="header-track-list">
 <div>
     <div>#</div>
-    <div>titolo</div>
+    <div>Titolo</div>
 </div>
     <div><img class="icon-image" src="https://img.icons8.com/?size=100&id=82767&format=png&color=EBEBEB"></div>
 </header>
@@ -94,7 +94,7 @@ $albumId = $_GET["id"];
             $totalSeconds = floor($track->duration_ms / 1000);
             $minutes = floor($totalSeconds / 60);
             $seconds = $totalSeconds % 60;
-
+            echo '<div class="like">';
             if(isset($_SESSION['liked_songs'][$track->id])){
 
                 echo '<a class="liked like-button"><img src="https://img.icons8.com/?size=100&id=85339&format=png&color=C850F2"></a>';
@@ -103,8 +103,10 @@ $albumId = $_GET["id"];
                 echo '<a class="hidden like-button"><img src="https://img.icons8.com/?size=100&id=1501&format=png&color=737373"></a>';
 
             }
-            echo '<span class=duration>'.sprintf('%d:%02d', $minutes, $seconds).'</span>';
             echo '</div>';
+            
+            echo '</div>';
+            echo '<span class=duration>'.sprintf('%d:%02d', $minutes, $seconds).'</span>';
             echo '</span>';
             $index++;
 
