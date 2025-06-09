@@ -20,6 +20,111 @@ function mouseLeave(event){
     
 }
 
+function showLess(){
+
+
+const songsGroup = document.querySelector("#songs");
+const allSongs = songsGroup.querySelectorAll('.song');
+
+    
+    for (let i = 5; i < allSongs.length; i++) {
+        songsGroup.removeChild(allSongs[i]);
+    }
+
+const mostraMeno = songsGroup.querySelector('.altro');
+        if (mostraMeno) {
+                songsGroup.removeChild(mostraMeno);
+        }
+
+        const mostraAltro = document.createElement('a');
+        mostraAltro.addEventListener('click', showMore);
+        mostraAltro.classList.add('altro');
+        mostraAltro.textContent = "Mostra altro";
+        songsGroup.appendChild(mostraAltro);
+
+}
+
+function showMore(){
+
+        let size = songsList.length;
+        const songsGroup = document.querySelector("#songs");
+        for(let i = 5; i<size; i++){
+
+                const song = songsList[i];
+              
+                const songSpan = document.createElement('span');
+                songSpan.classList.add('song');
+
+                songSpan.dataset.id = song.id;
+
+                const firstHalf = document.createElement('div');
+                const secondHalf = document.createElement('div');
+
+                const number = document.createElement('span');
+                number.classList.add('number');
+                number.textContent = i+1;
+
+                const icon = document.createElement('img');
+                icon.src= song.album.images[0].url;
+                icon.classList.add('song-icon');
+                
+                const name = document.createElement('span');
+                name.textContent = song.name;
+
+                firstHalf.appendChild(number);
+                firstHalf.appendChild(icon);
+                firstHalf.appendChild(name);
+
+                const likeButton = document.createElement('a');
+                const likeIcon = document.createElement('img');
+                
+                if(!song.liked){
+                        likeIcon.src="https://img.icons8.com/?size=100&id=1501&format=png&color=737373";
+                        likeButton.classList.add('hidden');
+                        songSpan.addEventListener("mouseenter", mouseEntered);
+                        songSpan.addEventListener("mouseleave", mouseLeave);
+
+                }else{
+                        likeIcon.src="https://img.icons8.com/?size=100&id=85339&format=png&color=C850F2";
+                        likeButton.classList.add('liked');       
+                }
+                
+                
+                
+                likeButton.addEventListener('click', toggleLike);
+                likeButton.appendChild(likeIcon);
+
+                const durata = document.createElement('span');
+                const duration_ms = song.duration_ms;
+                const totalSec = Math.floor(duration_ms / 1000);
+                const min = Math.floor(totalSec / 60);
+                const sec = totalSec % 60;
+                const paddedSec = (sec < 10 ? '0' : '') + sec;
+                durata.textContent = min + ':' + paddedSec;
+
+                secondHalf.appendChild(likeButton);
+                secondHalf.appendChild(durata);
+
+                songSpan.appendChild(firstHalf);
+                songSpan.appendChild(secondHalf);
+
+                songsGroup.appendChild(songSpan);
+
+        }
+
+        const mostraAltro = songsGroup.querySelector('.altro');
+        if (mostraAltro) {
+                songsGroup.removeChild(mostraAltro);
+        }
+
+         const  mostraMeno = document.createElement('a');
+                mostraMeno.addEventListener('click', showLess);
+                mostraMeno.classList.add('altro');
+                mostraMeno.textContent = "Mostra meno";
+                songsGroup.appendChild(mostraMeno);
+
+}
+
 function toggleLike(event) {
     const button = event.currentTarget;
     const icon = button.querySelector('img');
@@ -127,6 +232,7 @@ function getSongs(json){
 
         if(size > 5){
                 const mostraAltro = document.createElement('a');
+                mostraAltro.addEventListener('click', showMore);
                 mostraAltro.classList.add('altro');
                 mostraAltro.textContent = "Mostra altro";
                 songsGroup.appendChild(mostraAltro);

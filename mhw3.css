@@ -599,6 +599,16 @@ button.gray-back:hover{
 
 }
 
+.like-over{
+
+    position: absolute;
+    margin-left: 64%;
+    margin-top: 64%;
+    width: 24px;
+    height: 24px;
+
+}
+
 .gray-text{
 
 

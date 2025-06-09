@@ -29,7 +29,7 @@ if(isset($_SESSION['username'])){
 
         $likes = '';
         while($row = mysqli_fetch_assoc($resultLikes)){
-        $likes .= '<diV class="like-element">
+        $likes .= '<diV class="like-element" data-id="'.$row['songId'].'">
                     <img src="'.$row['img'].'">
                     <div class = "song-info">
                         <div>'.$row['songName'].'</div>
@@ -69,14 +69,14 @@ if(isset($_SESSION['username'])){
                </div>';
 }
 echo '<div class="hidden" id=dropdown-profile>
-        <a href="Logout.php">
-            <div>
+        <div>
+            <a href="Profilo.php">
                 <p class="open-sans">Visualizza Profilo</p>
-            </div>
-            <div>
+            </a>
+            <a href="Logout.php">
                 <p class="open-sans">Logout</p>
-            </div>
-        </a>
+            </a>
+        </div>
         </div>';
                 
 echo  '<div class="hidden" id="dropdown-pam">

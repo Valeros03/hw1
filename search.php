@@ -9,8 +9,14 @@ include 'auth.php';
     $headers = array("Authorization: Bearer ".$_SESSION["token"]);
     curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-    $result = curl_exec($curl);
-    echo $result;
+    $result = json_decode(curl_exec($curl), true);
+
+    foreach ($result['tracks']['items'] as &$track) {
+        $track_id = $track['id'];
+        $track['liked'] = isset($_SESSION['liked_songs'][$track_id]);
+    }
+
+    echo json_encode($result);
     curl_close($curl);
 
 

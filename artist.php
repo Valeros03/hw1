@@ -68,6 +68,7 @@ $artistId = $_GET["id"];
 
 
             </div>
+            
 
         </div>
 

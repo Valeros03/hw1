@@ -72,7 +72,7 @@ $albumId = $_GET["id"];
     $result = json_decode(curl_exec($curl));
     curl_close($curl);
 
-
+    
         $tracks = $result->items;
         $index = 1;
 

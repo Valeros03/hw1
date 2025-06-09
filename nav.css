@@ -28,13 +28,8 @@
     z-index: 500;
 }
 
-#dropdown-profile a{
 
-  text-decoration: none;
-    
-}
-
-#dropdown-profile a div{
+#dropdown-profile div a{
 
     display: flex;
     align-items: center;
@@ -44,5 +39,45 @@
     height: 40px;
     color:white;
     margin-left: 8px;
+    text-decoration: none;
     
+    
+}
+
+
+.like-element{
+
+    display: flex;
+    font-size: 12px;
+    justify-content: space-between;
+    align-items: center;
+    color:white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: #2d2d2d;
+
+}
+
+.like-element img{
+
+    width: 48px;
+    height: 48px;
+    padding:8px;
+
+}
+
+.like-element a{
+    text-decoration: none;
+    color:rgb(161, 161, 161);
+}
+.artist-album{
+
+    display: flex;
+    justify-content:space-between;
+}
+
+.no-likes{
+
+    color:#525252;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin:24px;
 }

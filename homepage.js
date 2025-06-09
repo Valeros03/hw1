@@ -16,6 +16,9 @@ const searchButton = document.querySelector('#search-button');
 function onMouseOver(event){
 
     let playButton = event.currentTarget.querySelector('button.play-over');
+    if(!playButton)
+        playButton = event.currentTarget.querySelector('button.like-over');
+
     playButton.classList.remove('hidden');
 
 
@@ -24,6 +27,9 @@ function onMouseOver(event){
 function onMouseLeft(event){
 
     let playButton = event.currentTarget.querySelector('button.play-over');
+    if(!playButton)
+        playButton = event.currentTarget.querySelector('button.like-over');
+
     playButton.classList.add('hidden');
 
 
@@ -50,6 +56,28 @@ function hideDropDown(){
 
 }
 
+function toggleLikeCard(event) {
+    const card = event.currentTarget;
+    const icon = card.querySelector('.like-over').querySelector('img');
+
+    const songId = card.dataset.id;
+
+    if (card.classList.contains('liked')) {
+        icon.src = "https://img.icons8.com/?size=100&id=1501&format=png&color=737373"; 
+        card.classList.remove('liked');
+        card.addEventListener("mouseenter", onMouseOver);
+        card.addEventListener("mouseleave", onMouseLeft);
+        fetch('dislike.php?id=' + encodeURIComponent(songId));
+        
+    } else {
+        icon.src = "https://img.icons8.com/?size=100&id=85339&format=png&color=C850F2";
+        card.classList.add('liked');
+        card.removeEventListener("mouseenter", onMouseOver);
+        card.removeEventListener("mouseleave", onMouseLeft);
+        fetch('like.php?id=' + encodeURIComponent(songId));
+    }
+}
+
   function onResponse(response) {
    
     return response.json();
@@ -65,7 +93,6 @@ function hideDropDown(){
     artistCollection.innerHTML = '';
     trackCollection.innerHTML = '';
  
-    console.log(json);
     const albumResults = json.albums.items;
     const artistResults = json.artists.items;
     const trackResults = json.tracks.items;
@@ -97,19 +124,15 @@ function hideDropDown(){
 
     for(let i=0; i<num_track; i++)
       {
-        const playButton = document.createElement('button');
-        playButton.classList.add('icon-button');
-        playButton.classList.add('play-over');
-        playButton.classList.add('hidden');
-
-        const imagePlay = document.createElement('img');
-        imagePlay.src = 'https://img.icons8.com/?size=100&id=36067&format=png&color=40C057';
-        imagePlay.classList.add('icon-image');
-
-        playButton.appendChild(imagePlay);
      
-        const track_data = trackResults[i]
-       
+        const track_data = trackResults[i];
+
+        const LikeButton = document.createElement('button');
+        LikeButton.classList.add('icon-button');
+        LikeButton.classList.add('like-over');
+    
+        const imagePlay = document.createElement('img');
+        
         const title = track_data.name;
         const num_artist = track_data.artists.length;
         let artistList="";
@@ -126,12 +149,26 @@ function hideDropDown(){
         
         const track = document.createElement('a');
         track.classList.add('element-show');
-        track.href = "http://localhost/hw1/album.php?id=" + track_data.id;
+        track.dataset.id = track_data.id;
+        
         const imgWrapper = document.createElement('div');
         imgWrapper.classList.add('image-box');
 
-        
+        track.addEventListener('click', toggleLikeCard);
+        if(!track_data.liked){
+            imagePlay.src = 'https://img.icons8.com/?size=100&id=1501&format=png&color=737373';
+            LikeButton.classList.add('hidden');
+            track.addEventListener('mouseenter', onMouseOver);
+            track.addEventListener('mouseleave', onMouseLeft);
+             
+        }else{
+            imagePlay.src = 'https://img.icons8.com/?size=100&id=85339&format=png&color=C850F2';
+            track.classList.add('liked');  
+        }
+       
+        imagePlay.classList.add('icon-image');
 
+        LikeButton.appendChild(imagePlay);
         imgWrapper.appendChild(img);
   
         const nomeTrack = document.createElement('p');
@@ -144,7 +181,7 @@ function hideDropDown(){
         caption.classList.add('gray-text');
       
         track.appendChild(imgWrapper);
-        track.appendChild(playButton);
+        track.appendChild(LikeButton);
         track.appendChild(nomeTrack);
         track.append(caption);
         trackCollection.appendChild(track);
@@ -179,14 +216,15 @@ function hideDropDown(){
         const artist = document.createElement('a');
         artist.href = "http://localhost/hw1/artist.php?id=" + artist_data.id;
         artist.classList.add('element-show');
+
+        artist.addEventListener('mouseenter', onMouseOver);
+        artist.addEventListener('mouseleave', onMouseLeft);
         
         artist.dataset.ArtistId = artist_data.id;
   
         const imgWrapper = document.createElement('div');
         imgWrapper.classList.add('image-box');
 
-        
-  
         imgWrapper.appendChild(img);
 
         const nomeArtista = document.createElement('p');
@@ -237,7 +275,8 @@ function hideDropDown(){
       album.href = "http://localhost/hw1/album.php?id=" + album_data.id;
       album.classList.add('element-show');
 
-      
+      album.addEventListener('mouseenter', onMouseOver);
+      album.addEventListener('mouseleave', onMouseLeft);
 
       const imgWrapper = document.createElement('div');
       imgWrapper.classList.add('image-box');
@@ -261,13 +300,6 @@ function hideDropDown(){
 
     }
 
-    const elementList = document.querySelectorAll('a.element-show');
-
-
-    for(let element of elementList){
-        element.addEventListener('mouseenter', onMouseOver);
-        element.addEventListener('mouseleave', onMouseLeft);
-    }
     
   }
 
@@ -331,6 +363,7 @@ function GetSavedSongs(){
 const elementList = document.querySelectorAll('a.element-show');
 
 for(let element of elementList){
+   
     element.addEventListener('mouseenter', onMouseOver);
     element.addEventListener('mouseleave', onMouseLeft);
 }
@@ -352,5 +385,20 @@ const dropDownProf = document.querySelector('#dropdown-profile');
 if(profileButton){
 
     profileButton.addEventListener('click', showProfDropDown);
+
+}
+
+function dislike(event){
+
+    const id = event.currentTarget.parentNode.dataset.id;
+    event.currentTarget.parentNode.innerHTML = '';
+    fetch('dislike.php?id='+ encodeURIComponent(id));
+}
+
+const dislikeButtons = document.querySelectorAll('.remove-like');
+
+for(let dislikeButton of dislikeButtons){
+
+    dislikeButton.addEventListener('click', dislike);
 
 }
