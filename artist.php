@@ -2,16 +2,7 @@
 
 include 'userCheck.php';
 
-$artistId = $_GET["id"];
-
-    $curl = curl_init();
-    curl_setopt($curl, CURLOPT_URL, "https://api.spotify.com/v1/artists/".$artistId);
-    $headers = array("Authorization: Bearer ".$_SESSION["token"]);
-    curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-    $result = json_decode(curl_exec($curl));
-
-    curl_close($curl);
+$_SESSION['id_url'] = $_GET["id"];
 
 ?>
 
@@ -38,15 +29,7 @@ $artistId = $_GET["id"];
 <nav id="dashboard">
 <div id="content-show">
     <div class="header-artist">
-        <?php
-            if(isset($result->images[0]))
-                echo'<div class="image-box"><img class="artist-icon" src="'.$result->images[0]->url.'"></div>';
-                echo '<span class=intestazione-artista>';
-                echo '<h1>'.$result->name.'</h1>';
-                echo ''.$result->followers->total.' Followers';
-                echo '</span>';
-        ?>
-        
+     
     </div>
 
         <div class="action-menu">

@@ -2,14 +2,7 @@
 
 include 'userCheck.php';
 
-$albumId = $_GET["id"];
-
-    $curl = curl_init();
-    curl_setopt($curl, CURLOPT_URL, "https://api.spotify.com/v1/albums/".$albumId);
-    $headers = array("Authorization: Bearer ".$_SESSION["token"]);
-    curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-    $result = json_decode(curl_exec($curl));
+    $_SESSION['id_url'] = $_GET['id'];
 
 ?>
 
@@ -38,17 +31,6 @@ $albumId = $_GET["id"];
 
 <div class="header-album">
     
-    <?php     
-                  
-        echo'<div class="image-box"><img class="album-icon" src="'.$result->images[0]->url.'"></div>';
-        echo '<span class="intestazione-album">';
-        echo '<h1>'.$result->name.'</h1>';
-        echo '<sapn class="info-album"><a href="artist.php?id='.$result->artists[0]->id.'">'.$result->artists[0]->name.'</a>';
-        echo '• <div>'.$result->release_date.'</div>•<div>'.$result->total_tracks.' brani</div>';
-        echo '</span>';
-        echo '</span>';
-
-    ?>
 
 </div>
 
@@ -64,57 +46,7 @@ $albumId = $_GET["id"];
 
 <div id="track-list">
 <div id="songs">
-<?php
 
-    
-    curl_setopt($curl, CURLOPT_URL, "https://api.spotify.com/v1/albums/".$albumId."/tracks");
-    $headers = array("Authorization: Bearer ".$_SESSION["token"]);
-    $result = json_decode(curl_exec($curl));
-    curl_close($curl);
-
-    
-        $tracks = $result->items;
-        $index = 1;
-
-        foreach ($tracks as $track) {
-
-            $artists = $track->artists;
-            echo '<span class="song" data-id="'.$track->id.'">';
-            echo '<div><sapn class="number">'.$index.'</sapn>
-            <span class="title-artists">'.$track->name;
-            echo '<div class="names">';
-            foreach($artists as $artist){
-                echo '<a href="artist.php?id='.$artist->id.'" class="artist-name space-text">'.$artist->name.'</a>';
-            }
-            echo '</div>';
-            echo '</span>'; 
-            echo '</div>';
-            echo '<div>';
-
-            $totalSeconds = floor($track->duration_ms / 1000);
-            $minutes = floor($totalSeconds / 60);
-            $seconds = $totalSeconds % 60;
-            echo '<div class="like">';
-            if(isset($_SESSION['liked_songs'][$track->id])){
-
-                echo '<a class="liked like-button"><img src="https://img.icons8.com/?size=100&id=85339&format=png&color=C850F2"></a>';
-            }else{
-
-                echo '<a class="hidden like-button"><img src="https://img.icons8.com/?size=100&id=1501&format=png&color=737373"></a>';
-
-            }
-            echo '</div>';
-            
-            echo '</div>';
-            echo '<span class=duration>'.sprintf('%d:%02d', $minutes, $seconds).'</span>';
-            echo '</span>';
-            $index++;
-
-
-        }
-
-
-?>
 </div>
 </div>
 

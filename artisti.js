@@ -319,13 +319,41 @@ function getAlbum(json){
 
 }
 
-const url = new URL(window.location.href);
-const params = new URLSearchParams(url.search);
+function createArtistHeader(data) {
+    const headerArtist = document.querySelector('.header-artist');
+    
+    if (data.images && data.images[0]) {
+        const imageBox = document.createElement('div');
+        imageBox.classList.add('image-box');
+        
+        const artistIcon = document.createElement('img');
+        artistIcon.classList.add('artist-icon');
+        artistIcon.src = data.images[0].url;
+        
+        imageBox.appendChild(artistIcon);
+        headerArtist.appendChild(imageBox);
+    }
+    
+    const spanIntestazione = document.createElement('span');
+    spanIntestazione.classList.add('intestazione-artista');
+    
+    const h1 = document.createElement('h1');
+    h1.textContent = data.name;
+    spanIntestazione.appendChild(h1);
+    
+ 
+    const followers = document.createElement('div');
+    followers.textContent = data.followers.total + ' Followers';
+    spanIntestazione.appendChild(followers);
+    
+    headerArtist.appendChild(spanIntestazione);
+}
 
-const id = params.get("id");
 
-fetch("Songs.php?id=" + encodeURIComponent(id)).then(onResponse).then(getSongs);
-fetch("Discografia.php?id=" + encodeURIComponent(id)).then(onResponse).then(getAlbum);
+fetch("getArtist.php").then(onResponse).then(createArtistHeader);
+fetch("Songs.php").then(onResponse).then(getSongs);
+fetch("Discografia.php").then(onResponse).then(getAlbum);
+
 
 
 

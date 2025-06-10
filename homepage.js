@@ -355,18 +355,82 @@ function showInputContainer(){
     isShown = !isShown;
 }
 
-function GetSavedSongs(){
+function dislike(event){
 
-    
+    const id = event.currentTarget.parentNode.dataset.id;
+    event.currentTarget.parentNode.innerHTML = '';
+    fetch('dislike.php?id='+ encodeURIComponent(id));
 }
 
-const elementList = document.querySelectorAll('a.element-show');
+function addLikes(json){
 
-for(let element of elementList){
-   
-    element.addEventListener('mouseenter', onMouseOver);
-    element.addEventListener('mouseleave', onMouseLeft);
+    if(json.likes.length <= 0){
+        return;
+    }
+const container = document.querySelector('.user-playlists');
+container.innerHTML = '';
+
+for (let i = 0; i < json.likes.length; i++) {
+    const row = json.likes[i];
+
+    const likeElement = document.createElement('div');
+    likeElement.className = 'like-element';
+    likeElement.dataset.id = row.songId;
+
+    const img = document.createElement('img');
+    img.src = row.img;
+    likeElement.appendChild(img);
+
+    const songInfo = document.createElement('div');
+    songInfo.className = 'song-info';
+
+    const songNameDiv = document.createElement('div');
+    songNameDiv.textContent = row.songName;
+    songInfo.appendChild(songNameDiv);
+
+    const artistAlbum = document.createElement('div');
+    artistAlbum.className = 'artist-album';
+
+    const artistLink = document.createElement('a');
+    artistLink.href = 'artist.php?id=' + row.artistId;
+    artistLink.textContent = row.artistName;
+
+    const separator = document.createElement('div');
+    separator.textContent = '•';
+
+    const albumLink = document.createElement('a');
+    albumLink.href = 'album.php?id=' + row.albumId;
+    albumLink.textContent = row.albumName;
+
+    artistAlbum.appendChild(artistLink);
+    artistAlbum.appendChild(separator);
+    artistAlbum.appendChild(albumLink);
+
+    songInfo.appendChild(artistAlbum);
+    likeElement.appendChild(songInfo);
+
+    const removeLike = document.createElement('img');
+    removeLike.className = 'remove-like';
+    removeLike.src = 'https://img.icons8.com/?size=100&id=46&format=png&color=737373';
+
+    likeElement.appendChild(removeLike);
+
+    container.appendChild(likeElement);
 }
+const dislikeButtons = document.querySelectorAll('.remove-like');
+
+for(let dislikeButton of dislikeButtons){
+
+    dislikeButton.addEventListener('click', dislike);
+
+}
+
+}
+
+
+
+
+
 
 
 
@@ -388,17 +452,4 @@ if(profileButton){
 
 }
 
-function dislike(event){
-
-    const id = event.currentTarget.parentNode.dataset.id;
-    event.currentTarget.parentNode.innerHTML = '';
-    fetch('dislike.php?id='+ encodeURIComponent(id));
-}
-
-const dislikeButtons = document.querySelectorAll('.remove-like');
-
-for(let dislikeButton of dislikeButtons){
-
-    dislikeButton.addEventListener('click', dislike);
-
-}
+fetch('getLikes.php').then(onResponse).then(addLikes);

@@ -52,6 +52,6 @@ if(mysqli_query($conn, $likeQuery))
     $_SESSION['liked_songs'][$songId] = true;
 
 mysqli_close($conn);
+mysqli_free_result($result);
 
-echo json_encode(['status' => 'success']);
 ?>

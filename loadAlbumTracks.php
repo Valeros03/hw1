@@ -1,0 +1,25 @@
+<?php
+
+include 'auth.php';
+
+    $albumId = $_SESSION["id_url"];
+
+    $curl = curl_init();
+    curl_setopt($curl, CURLOPT_URL, "https://api.spotify.com/v1/albums/".$albumId."/tracks");
+    $headers = array("Authorization: Bearer ".$_SESSION["token"]);
+    curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+    $result = json_decode(curl_exec($curl));
+
+
+    foreach ($result->items as &$track) {
+        $track_id = $track->id;
+        $track->liked = isset($_SESSION['liked_songs'][$track_id]);
+    }
+
+    echo json_encode($result);
+
+    curl_close($curl);
+
+
+?>
